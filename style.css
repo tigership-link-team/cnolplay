@@ -825,5 +825,4 @@ html.rv-js [data-split]:not(.is-in) .tw > span, .tw > span { transform: none; op
 .rp-chart .mk1 { animation: mk1 7s infinite; } .rp-chart .mk2 { animation: mk2 7s infinite; } .rp-chart .mk3 { animation: mk3 7s infinite; }
 .kpis .bar > u, .src .bar > i { animation: fillv 7s infinite; }
 .msg.m1 { animation: m1 10s infinite; } .msg.m2 { animation: m2 10s infinite; } .msg.m3 { animation: m3 10s infinite; } .msg.m4 { animation: m4 10s infinite; } .msg.m5 { animation: m5 10s infinite; }
-@media (prefers-reduced-motion: reduce) { .scr, .scr * { animation: none !important; } }
 /* @screens:end */
