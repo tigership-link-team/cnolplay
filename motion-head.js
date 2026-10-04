@@ -1,0 +1,2 @@
+/* <head> 맨 위에 넣는 한 줄: 모션 준비 + 페이지 전환 이어받기 */
+(function(){try{var d=document.documentElement;if('IntersectionObserver' in window){d.classList.add('rv-js');setTimeout(function(){if(!d.classList.contains('rv-ready'))d.classList.remove('rv-js')},4000)}try{if(sessionStorage.getItem('pt')==='1'){sessionStorage.removeItem('pt');d.classList.add('pt-in');setTimeout(function(){d.classList.remove('pt-in')},1600)}}catch(e){}}catch(e){}})();
