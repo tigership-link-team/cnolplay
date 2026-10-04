@@ -1,7 +1,7 @@
 /* CNOL — cnolplay.com
    - 모션·호버: HR Motion Kit (motion-head.js / motion.css / motion.js — whrcompany.com 메인과 동일)
    - Material Design 3: 리플, 상단 바, 내비게이션 드로어, 확장형 FAB
-   - 문의 폼 → Supabase(cnolplay_inquiries) 저장 (익명 insert 전용) */
+   - 문의 폼 → Supabase(cnolplay_inquiries) 저장 + support@whrcompany.com 메일 자동 전달(FormSubmit, whrcompany.com과 같은 방식) */
 (function () {
   "use strict";
 
@@ -10,7 +10,7 @@
   /* ===== Material: ripple ===== */
   function initRipple() {
     document.addEventListener("pointerdown", function (e) {
-      var host = e.target.closest && e.target.closest(".ripple, .state");
+      var host = e.target.closest && e.target.closest(".ripple");
       if (!host || reduce) return;
       var r = host.getBoundingClientRect();
       var size = Math.max(r.width, r.height) * 2.2;
@@ -79,6 +79,7 @@
   /* ===== 문의 폼 ===== */
   var SUPABASE_URL = "https://gkifdofvwvrsmstykayn.supabase.co";
   var SUPABASE_KEY = "sb_publishable_ArLDrMFZ_joTvI9RGmp8jA_HyfnrnvT"; // 공개용(publishable) 키 — 문의 저장만 가능
+  var MAIL_TO = "https://formsubmit.co/ajax/support@whrcompany.com";
   var SERVICES = { music: "크놀뮤직 VIP 협업", supply: "음원 공급·제휴", ad: "크놀AD 캠페인", etc: "기타" };
 
   var form = document.getElementById("inquiry-form");
@@ -132,22 +133,60 @@
     submitBtn.disabled = true;
     submitBtn.textContent = "보내는 중…";
 
-    fetch(SUPABASE_URL + "/rest/v1/cnolplay_inquiries", {
-      method: "POST",
-      headers: { apikey: SUPABASE_KEY, "Content-Type": "application/json", Prefer: "return=minimal" },
-      body: JSON.stringify(payload)
-    }).then(function (res) {
-      if (res.ok) {
-        form.innerHTML =
-          '<div class="form-done" role="status">' +
-          '<span class="icon-box green"><span class="ms lg">check</span></span>' +
-          "<h3>문의가 접수됐어요</h3>" +
-          "<p>남겨주신 이메일로 담당자가 연락드리겠습니다.<br>급한 건은 왼쪽 이메일로 바로 보내주셔도 됩니다.</p>" +
-          "</div>";
-        return;
-      }
-      return res.text().then(function (t) { throw new Error(/too_many_requests/.test(t) ? "busy" : "fail"); });
-    }).catch(function (err) {
+    // 1) Supabase 저장
+    function saveDb() {
+      return fetch(SUPABASE_URL + "/rest/v1/cnolplay_inquiries", {
+        method: "POST",
+        headers: { apikey: SUPABASE_KEY, "Content-Type": "application/json", Prefer: "return=minimal" },
+        body: JSON.stringify(payload)
+      }).then(function (res) {
+        if (res.ok) return true;
+        return res.text().then(function (t) { throw new Error(/too_many_requests/.test(t) ? "busy" : "fail"); });
+      });
+    }
+    // 2) support@whrcompany.com 으로 메일 자동 전달 — 제목에 [크놀플레이] 표시
+    function sendMail() {
+      return fetch(MAIL_TO, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          _subject: "[크놀플레이 문의] " + payload.service + " · " + payload.name,
+          _template: "table",
+          _captcha: "false",
+          _replyto: payload.email,
+          "보낸 곳": "크놀플레이 (cnolplay.com)",
+          "문의 분야": payload.service,
+          "이름": payload.name,
+          "회사 · 채널명": payload.company || "-",
+          "이메일": payload.email,
+          "연락처": payload.phone || "-",
+          "문의 내용": payload.message,
+          "보낸 페이지": "cnolplay.com" + payload.source_page,
+          "접수 시각": new Date().toLocaleString("ko-KR", { timeZone: "Asia/Seoul" })
+        })
+      }).then(function (res) {
+        if (!res.ok) throw new Error("mail");
+        return res.json().catch(function () { return {}; });
+      }).then(function (j) {
+        if (j && String(j.success) === "false") throw new Error("mail");
+        return true;
+      });
+    }
+    function done() {
+      form.innerHTML =
+        '<div class="form-done" role="status">' +
+        '<span class="icon-box green"><span class="ms lg">check</span></span>' +
+        "<h3>문의가 접수됐어요</h3>" +
+        "<p>남겨주신 이메일로 담당자가 연락드리겠습니다.<br>급한 건은 support@whrcompany.com 으로 바로 보내주셔도 됩니다.</p>" +
+        "</div>";
+    }
+
+    saveDb().then(function () {
+      return sendMail().catch(function () { return false; }); // 저장됐으면 접수 완료
+    }, function (err) {
+      if (err && err.message === "busy") throw err;
+      return sendMail(); // 저장이 안 되면 메일로라도 전달
+    }).then(done).catch(function (err) {
       submitBtn.disabled = false;
       submitBtn.innerHTML = submitHTML;
       if (err && err.message === "busy") setStatus("짧은 시간에 여러 번 보내셨어요. 10분 뒤에 다시 시도해 주세요.", "err");
