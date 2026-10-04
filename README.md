@@ -17,3 +17,6 @@
 | `vercel.json` | 깔끔한 주소(.html 생략), 예전 주소(/company, /features) → 홈 이동, 보안 헤더 |
 
 정적 HTML이라 빌드 과정이 없습니다. 문구를 고치려면 해당 HTML 파일을 직접 수정하면 됩니다.
+
+
+Vercel 프로젝트: miami127-prog's projects / cnolplay — 이 저장소 main 브랜치와 연결돼 있습니다.
