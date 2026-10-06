@@ -80,7 +80,7 @@
   var SUPABASE_URL = "https://gkifdofvwvrsmstykayn.supabase.co";
   var SUPABASE_KEY = "sb_publishable_ArLDrMFZ_joTvI9RGmp8jA_HyfnrnvT"; // 공개용(publishable) 키 — 문의 저장만 가능
   var MAIL_TO = "https://formsubmit.co/ajax/support@whrcompany.com";
-  var SERVICES = { music: "크놀뮤직 VIP 협업", supply: "음원 공급·제휴", ad: "크놀AD 캠페인", etc: "기타" };
+  var SERVICES = { music: "크놀뮤직 VIP 협업", ad: "크놀AD 캠페인", etc: "기타" };
 
   var form = document.getElementById("inquiry-form");
   if (!form) return;

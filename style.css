@@ -265,6 +265,14 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .hero .lead { margin-top: 24px; max-width: 600px; color: var(--md-on-surface-variant); }
 .hero .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; }
 .hero .chips { margin-bottom: 24px; }
+
+/* ---------- 안내 문구 (국내 크리에이터 이용 일시 중단 — 홈·/music 히어로, 문의 폼) ---------- */
+.notice { display: flex; align-items: flex-start; gap: 12px; max-width: 600px; padding: 14px 18px; border-radius: var(--shape-m); background: var(--md-gold-container); color: var(--md-on-gold-container); font-size: 15px; line-height: 1.6; }
+.notice .ms { flex: none; font-size: 22px; line-height: 1.1; color: var(--md-gold); }
+.notice b { display: block; font-weight: 700; }
+.hero .notice { margin-top: 24px; }
+.form .notice { margin: -8px 0 24px; padding: 12px 14px; font-size: 14px; }
+.form .notice .ms { font-size: 20px; }
 .hero-art { position: relative; min-height: 420px; display: grid; place-items: center; }
 .shape { position: absolute; z-index: -1; }
 .shape-cookie { width: 520px; height: 520px; right: -60px; top: 50%; transform: translateY(-50%); color: var(--accent-container); }

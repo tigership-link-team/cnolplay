@@ -8,7 +8,8 @@
 - 도메인: cnolplay.com / www.cnolplay.com (DNS는 Cloudflare, Vercel로 연결)
 - 디자인: Material Design 3 (CNOL 브랜드 색으로 테마), 글꼴 Pretendard, 아이콘 Material Symbols
 - 모션: HR Motion Kit (`motion-head.js`, `motion.css`, `motion.js` — whrcompany.com 메인과 같은 파일). 부채꼴 카드·카드 넘기기·페이지 전환은 그대로 쓰고, 스크롤 등장(떠오르기)과 마우스 기울기·자석 효과는 끔
-- 문의 폼: Supabase `cnolplay_inquiries` 테이블에 저장 + support@whrcompany.com 으로 메일 자동 전달(FormSubmit, 제목 `[크놀플레이 문의] …`)
+- 문의 폼: Supabase `cnolplay_inquiries` 테이블에 저장 + support@whrcompany.com 으로 메일 자동 전달(FormSubmit, 제목 `[크놀플레이 문의] …`). 문의 분야는 크놀뮤직 VIP 협업 · 크놀AD 캠페인 · 기타 (음원 공급·제휴 문의는 2026-10에 없앰 — 폼 선택지, `/music` 버튼, FAQ)
+- 국내 크리에이터 이용 일시 중단 안내(2026-10~): `.notice` 블록이 홈 히어로, `/music` 히어로, 문의 폼 세 곳에 있음. 다시 받게 되면 이 세 블록을 지우면 됨
 
 ## 파일
 
