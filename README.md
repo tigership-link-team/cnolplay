@@ -3,6 +3,7 @@
 크놀(CNOL) 소개 사이트 — 크놀뮤직 · 크놀AD 상세 설명.
 
 - 사이트 이름: **크리에이터 놀이터** (구글 검색 결과·공유 미리보기에 표시되는 이름). `index.html`의 WebSite 구조화 데이터(`application/ld+json`)와 각 페이지 `og:site_name`에 들어 있으니, 이름을 바꿀 때는 이 둘과 홈 `<title>`을 함께 고칠 것. 크놀뮤직은 별도 사이트(cnolmusic.com)이므로 이 사이트 이름으로 쓰지 않음
+- 구글 서치 콘솔: `https://cnolplay.com/` 속성으로 등록됨. `index.html`의 `google-site-verification` 메타 태그가 소유 확인용이니 지우지 말 것
 - 호스팅: Vercel (main 브랜치에 커밋하면 자동 배포)
 - 도메인: cnolplay.com / www.cnolplay.com (DNS는 Cloudflare, Vercel로 연결)
 - 디자인: Material Design 3 (CNOL 브랜드 색으로 테마), 글꼴 Pretendard, 아이콘 Material Symbols
