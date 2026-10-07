@@ -2,6 +2,13 @@
 
 크놀(CNOL) 소개 사이트 — 크놀뮤직 · 크놀AD 상세 설명.
 
+> **지금은 잠시 비공개 상태 (2026-10-07~)**
+> `index.html` · `music.html` · `ad.html` · `404.html` 네 파일을 빈 흰 화면으로 바꿔 둠 (화면엔 아무것도 없음. 검색 차단 `noindex`와 서치 콘솔 확인 태그만 들어 있음). 구글 서치 콘솔 '삭제' 메뉴에 `https://cnolplay.com/` 전체 임시 삭제 요청도 걸어 둠.
+> 원래 사이트 파일은 커밋 `c48e00e`에 그대로 있음. 다시 공개할 때는
+> 1. 네 파일을 커밋 `c48e00e` 버전으로 되돌리고 (`git checkout c48e00e -- index.html music.html ad.html 404.html`)
+> 2. 서치 콘솔 '삭제' 메뉴에서 임시 삭제 요청을 취소한 뒤
+> 3. URL 검사로 `https://cnolplay.com/` 색인 생성을 요청할 것
+
 - 사이트 이름: **크리에이터 놀이터** (구글 검색 결과·공유 미리보기에 표시되는 이름). `index.html`의 WebSite 구조화 데이터(`application/ld+json`)와 각 페이지 `og:site_name`에 들어 있으니, 이름을 바꿀 때는 이 둘과 홈 `<title>`을 함께 고칠 것. 크놀뮤직은 별도 사이트(cnolmusic.com)이므로 이 사이트 이름으로 쓰지 않음
 - 구글 서치 콘솔: `https://cnolplay.com/` 속성으로 등록됨. `index.html`의 `google-site-verification` 메타 태그가 소유 확인용이니 지우지 말 것
 - 호스팅: Vercel (main 브랜치에 커밋하면 자동 배포)
